@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE MudletPackage>
 <MudletPackage version="1.001">
 	<TriggerPackage>
@@ -232,7 +232,7 @@ appendBuffer("right_term")</script>
 							<script>if dprCount == nil then
   dprCount = 0
 end
- 
+
 dprCount = (dprCount + tonumber(matches[2]))
 
 </script>
@@ -299,7 +299,7 @@ takenCount = (takenCount + matches[2])</script>
 						<name>bufferNorm</name>
 						<script>local line = matches[2]
 
-lineHandler(tostring(line)) 
+lineHandler(tostring(line))
   </script>
 						<triggerType>0</triggerType>
 						<conditonLineDelta>0</conditonLineDelta>
@@ -573,9 +573,9 @@ end
 
 --Once MSDP is reporting data to the client you can utilize the data
 --via the reportables name eg. msdp.HEALTH or msdp.MANA (Capitalization
---matters) I have configured an event for all currently active MSDP 
+--matters) I have configured an event for all currently active MSDP
 --reportables. Simply add code inside the function for the reportable
---and have fun. I have included a simple UI and guages for an easy to 
+--and have fun. I have included a simple UI and guages for an easy to
 --follow example (look in MSDP/Score/msdp.grab_HEALTH). most functions
 --and varibales live under the global msdp so that the Variables menu
 --is not crowded. Lastly, make sure you enable the script so that the
@@ -885,11 +885,11 @@ end</script>
 function msdp.grab_HEALTH()
   UI.hpbar:show()
   UI.gauge_adjustment()
-  
+
   if msdp.HEALTH == nil or msdp.HEALTH_MAX == nil then
     return
   end
-  
+
   if UI.gauge_state[2] == true then
     local percent = math.floor((tonumber(msdp.HEALTH)/ tonumber(msdp.HEALTH_MAX)) * 100)
     UI.hpbar:setText("&lt;center&gt;&amp;#x2665;&lt;strong&gt; " .. tostring(percent) .. "%")
@@ -897,7 +897,7 @@ function msdp.grab_HEALTH()
     UI.hpbar:setText("&lt;center&gt;&amp;#x2665;&lt;strong&gt; " .. tostring(msdp.HEALTH) .. "/" .. tostring(msdp.HEALTH_MAX))
   end
   UI.hpbar:setValue(tonumber(msdp.HEALTH), tonumber(msdp.HEALTH_MAX))
-  
+
 end</script>
 							<eventHandlerList>
 								<string>msdp.HEALTH</string>
@@ -910,11 +910,11 @@ end</script>
 function msdp.grab_HEALTH_MAX()
   UI.hpbar:show()
   UI.gauge_adjustment()
-  
+
   if msdp.HEALTH == nil or msdp.HEALTH_MAX == nil then
     return
   end
-  
+
   if UI.gauge_state[2] == true then
     local percent = math.floor((tonumber(msdp.HEALTH)/ tonumber(msdp.HEALTH_MAX)) * 100)
     UI.hpbar:setText("&lt;center&gt;&amp;#x2665;&lt;strong&gt; " .. tostring(percent) .. "%")
@@ -922,7 +922,7 @@ function msdp.grab_HEALTH_MAX()
     UI.hpbar:setText("&lt;center&gt;&amp;#x2665;&lt;strong&gt; " .. tostring(msdp.HEALTH) .. "/" .. tostring(msdp.HEALTH_MAX))
   end
   UI.hpbar:setValue(tonumber(msdp.HEALTH), tonumber(msdp.HEALTH_MAX))
-  
+
 end</script>
 							<eventHandlerList>
 								<string>msdp.HEALTH_MAX</string>
@@ -935,11 +935,11 @@ end</script>
 function msdp.grab_MOVEMENT()
   UI.movebar:show()
   UI.gauge_adjustment()
-  
+
   if msdp.MOVEMENT == nil or msdp.MOVEMENT_MAX == nil then
     return
   end
-  
+
   if UI.gauge_state[4] == true then
     local percent = math.floor((tonumber(msdp.MOVEMENT)/ tonumber(msdp.MOVEMENT_MAX)) * 100)
     UI.movebar:setText("&lt;center&gt;&amp;#x1F9B6;&lt;strong&gt; " .. tostring(percent) .. "%")
@@ -960,11 +960,11 @@ end</script>
 function msdp.grab_MOVEMENT_MAX()
   UI.movebar:show()
   UI.gauge_adjustment()
-  
+
   if msdp.MOVEMENT == nil or msdp.MOVEMENT_MAX == nil then
     return
   end
-  
+
   if UI.gauge_state[4] == true then
     local percent = math.floor((tonumber(msdp.MOVEMENT)/ tonumber(msdp.MOVEMENT_MAX)) * 100)
     UI.movebar:setText("&lt;center&gt;&amp;#x1F9B6;&lt;strong&gt; " .. tostring(percent) .. "%")
@@ -984,18 +984,18 @@ end</script>
 							<script>--will report hero exp
 function msdp.grab_HERO_EXP()
   UI.herobar:show()
-  
+
   if msdp.HERO_EXP == nil or msdp.HERO_EXP_TNL == nil then
     return
   end
-  
+
   if UI.gauge_state[6] == true then
     local percent = math.floor((tonumber(msdp.HERO_EXP)/ tonumber(msdp.HERO_EXP_TNL)) * 100)
     UI.herobar:setText("&lt;center&gt;&amp;#x1F310;&lt;strong&gt; " .. tostring(percent) .. "%")
   else
     UI.herobar:setText("&lt;center&gt;&amp;#x1F310;&lt;strong&gt; " .. tostring(msdp.HERO_EXP) .. "/" .. tostring(msdp.HERO_EXP_TNL))
   end
-  
+
   UI.herobar:setValue(tonumber(msdp.HERO_EXP), tonumber(msdp.HERO_EXP_TNL))
 
 end</script>
@@ -1009,20 +1009,20 @@ end</script>
 							<script>--will grab hero exp till next hero level
 function msdp.grab_HERO_EXP_TNL()
   UI.herobar:show()
-  
+
   if msdp.HERO_EXP == nil or msdp.HERO_EXP_TNL == nil then
     return
   end
-   
+
   if UI.gauge_state[6] == true then
     local percent = math.floor((tonumber(msdp.HERO_EXP)/ tonumber(msdp.HERO_EXP_TNL)) * 100)
     UI.herobar:setText("&lt;center&gt;&amp;#x1F310;&lt;strong&gt; " .. tostring(percent) .. "%")
   else
     UI.herobar:setText("&lt;center&gt;&amp;#x1F310;&lt;strong&gt; " .. tostring(msdp.HERO_EXP) .. "/" .. tostring(msdp.HERO_EXP_TNL))
   end
-  
+
   UI.herobar:setValue(tonumber(msdp.HERO_EXP), tonumber(msdp.HERO_EXP_TNL))
-  
+
 end</script>
 							<eventHandlerList>
 								<string>msdp.HERO_EXP_TNL</string>
@@ -1034,25 +1034,25 @@ end</script>
 							<script>--will report legacy experience
 function msdp.grab_EXPERIENCE()
   UI.expbar:show()
-  
+
   if msdp.EXPERIENCE == nil or msdp.EXPERIENCE_MAX == nil then
     return
   end
-  
+
   if UI.gauge_state[5] == true then
     local percent = math.floor((tonumber(msdp.EXPERIENCE)/ tonumber(msdp.EXPERIENCE_MAX)) * 100)
     UI.expbar:setText("&lt;center&gt;&amp;#x1F310;&lt;strong&gt; " .. tostring(percent) .. "%")
   else
     UI.expbar:setText("&lt;center&gt;&amp;#x1F310;&lt;strong&gt; " .. tostring(msdp.EXPERIENCE) .. "/" .. tostring(msdp.EXPERIENCE_MAX))
   end
-  
+
   local current = msdp.EXPERIENCE
   local max = msdp.EXPERIENCE_MAX
-  
+
   if current &lt; max then
     current = max
   end
-  
+
   UI.expbar:setValue(tonumber(current), tonumber(max))
 
 end</script>
@@ -1066,20 +1066,20 @@ end</script>
 							<script>--will report legacy experience till level
 function msdp.grab_EXPERIENCE_MAX()
   UI.expbar:show()
-  
+
   if msdp.EXPERIENCE == nil or msdp.EXPERIENCE_MAX == nil then
     return
   end
-   
+
   if UI.gauge_state[5] == true then
     local percent = math.floor((tonumber(msdp.EXPERIENCE)/ tonumber(msdp.EXPERIENCE_MAX)) * 100)
     UI.expbar:setText("&lt;center&gt;&amp;#x1F310;&lt;strong&gt; " .. tostring(percent) .. "%")
   else
     UI.expbar:setText("&lt;center&gt;&amp;#x1F310;&lt;strong&gt; " .. tostring(msdp.EXPERIENCE) .. "/" .. tostring(msdp.EXPERIENCE_MAX))
   end
-  
+
   UI.expbar:setValue(tonumber(msdp.EXPERIENCE), tonumber(msdp.EXPERIENCE_MAX))
-  
+
 end</script>
 							<eventHandlerList>
 								<string>msdp.EXPERIENCE_MAX</string>
@@ -1092,11 +1092,11 @@ end</script>
 function msdp.grab_MANA()
   UI.manabar:show()
   UI.gauge_adjustment()
-  
+
   if msdp.MANA == nil or msdp.MANA_MAX == nil then
     return
   end
-  
+
   if UI.gauge_state[3] == true then
     local percent = math.floor((tonumber(msdp.MANA)/ tonumber(msdp.MANA_MAX)) * 100)
     UI.manabar:setText("&lt;center&gt;&amp;#x1F9B6;&lt;strong&gt; " .. tostring(percent) .. "%")
@@ -1117,11 +1117,11 @@ end</script>
 function msdp.grab_MANA_MAX()
   UI.manabar:show()
   UI.gauge_adjustment()
-  
+
   if msdp.MANA == nil or msdp.MANA_MAX == nil then
     return
   end
-   
+
   if UI.gauge_state[3] == true then
     local percent = math.floor((tonumber(msdp.MANA)/ tonumber(msdp.MANA_MAX)) * 100)
     UI.manabar:setText("&lt;center&gt;&amp;#x1F9B6;&lt;strong&gt; " .. tostring(percent) .. "%")
@@ -1141,18 +1141,18 @@ end</script>
 							<script>--will report legacy levels
 function msdp.grab_ASCEND_EXP()
   UI.ascendbar:show()
-  
+
   if msdp.ASCEND_EXP == nil or msdp.ASCEND_EXP_MAX == nil then
     return
   end
-  
+
   if UI.gauge_state[7] == true then
     local percent = math.floor((tonumber(msdp.ASCEND_EXP)/ tonumber(msdp.ASCEND_EXP_MAX)) * 100)
     UI.ascendbar:setText("&lt;center&gt;&amp;#x1F310;&lt;strong&gt; " .. tostring(percent) .. "%")
   else
     UI.ascendbar:setText("&lt;center&gt;&amp;#x1F310;&lt;strong&gt; " .. tostring(msdp.ASCEND_EXP) .. "/" .. tostring(msdp.ASCEND_EXP_MAX))
   end
-  
+
   UI.ascendbar:setValue(tonumber(msdp.ASCEND_EXP), tonumber(msdp.ASCEND_EXP_MAX))
 
 end</script>
@@ -1166,20 +1166,20 @@ end</script>
 							<script>--will report legacy levels till ascend
 function msdp.grab_ASCEND_EXP()
   UI.ascendbar:show()
-  
+
   if msdp.ASCEND_EXP == nil or msdp.ASCEND_EXP_MAX == nil then
     return
   end
-   
+
   if UI.gauge_state[7] == true then
     local percent = math.floor((tonumber(msdp.ASCEND_EXP)/ tonumber(msdp.ASCEND_EXP_MAX)) * 100)
     UI.ascendbar:setText("&lt;center&gt;&amp;#x1F310;&lt;strong&gt; " .. tostring(percent) .. "%")
   else
     UI.ascendbar:setText("&lt;center&gt;&amp;#x1F310;&lt;strong&gt; " .. tostring(msdp.ASCEND_EXP) .. "/" .. tostring(msdp.ASCEND_EXP_MAX))
   end
-  
+
   UI.ascendbar:setValue(tonumber(msdp.ASCEND_EXP), tonumber(msdp.ASCEND_EXP_MAX))
-  
+
 end</script>
 							<eventHandlerList>
 								<string>msdp.ASCEND_EXP</string>
@@ -1636,7 +1636,7 @@ function msdp.grab_SHIELD_UNIT()
     UI.gauge_adjustment()
     return
   end
-  
+
   local curr = 0
   local max = 0
   --SHIELD_UNIT data comes in as a table so we need to iterate the table
@@ -1644,7 +1644,7 @@ function msdp.grab_SHIELD_UNIT()
     curr, max = rex.match(v,[[^(\d+)\:(\d+)\:\d+\:\d+$]])
     --cecho("&lt;yellow&gt;[ DEBUG ] - &lt;grey&gt;SHIELD_UNIT updated to:"..tostring(v).."\n")
   end
-  
+
   UI.shieldbar:show()
   UI.gauge_adjustment()
 
@@ -1654,7 +1654,7 @@ function msdp.grab_SHIELD_UNIT()
   else
     UI.shieldbar:setText("&lt;center&gt;&amp;#x1F6E1;&lt;strong&gt; " .. tostring(curr) .. "/" .. tostring(max))
   end
-  
+
   UI.shieldbar:setValue(tonumber(curr), tonumber(max))
 
 end
@@ -1857,7 +1857,7 @@ function msdp.grab_QUEST_LIST()
     if tostring(action) == "completed" then
       send("quest completed " .. tostring(quest))
     end
-  end    
+  end
 end</script>
 							<eventHandlerList>
 								<string>msdp.QUEST_LIST</string>
@@ -1895,7 +1895,7 @@ function msdp_report_all()
     tempTimer(timer,function() sendMSDP("REPORT",v) end)
     timer = timer + 0.01
   end
-  tempTimer(timer, function () 
+  tempTimer(timer, function ()
     sendMSDP("LIST","REPORTED_VARIABLES")
     cecho("&lt;blue&gt;[ INFO ] -&lt;grey&gt; MSDP Report Complete: " .. timer .. "\n")
     end)
@@ -1907,7 +1907,7 @@ function msdp_unreport_all()
     tempTimer(timer,function() sendMSDP("UNREPORT",v) end)
     timer = timer + 0.01
   end
-  tempTimer(timer, function () 
+  tempTimer(timer, function ()
     sendMSDP("LIST","REPORTED_VARIABLES")
     cecho("&lt;blue&gt;[ INFO ] -&lt;grey&gt; MSDP Unreport Complete: " .. timer .. "\n")
     end)
@@ -1925,7 +1925,7 @@ end</script>
 						<packageName></packageName>
 						<script>UI = UI or {}
 
-UI.overflowStyleSheet = 
+UI.overflowStyleSheet =
   [[background-color: rgba(0, 0, 0, 0);
     border-width: 1px;
     border-color: black;
@@ -1934,7 +1934,7 @@ UI.overflowStyleSheet =
     padding: 3px;
   ]]
 
-UI.irbarfrontStyleSheet = 
+UI.irbarfrontStyleSheet =
   [[background-color: rgba(0, 155, 155, 100%);
     border-width: 1px;
     border-color: black;
@@ -1943,7 +1943,7 @@ UI.irbarfrontStyleSheet =
     padding: 3px;
   ]]
 
-UI.irbarbackStyleSheet = 
+UI.irbarbackStyleSheet =
   [[background-color: rgba(0, 155, 1155, 50%);
     border-width: 1px;
     border-color: black;
@@ -1951,8 +1951,8 @@ UI.irbarbackStyleSheet =
     border-radius: 7;
     padding: 3px;
   ]]
-  
-UI.oppobarfrontStyleSheet = 
+
+UI.oppobarfrontStyleSheet =
   [[background-color: rgba(255, 0, 0, 100%);
     border-width: 1px;
     border-color: black;
@@ -1961,7 +1961,7 @@ UI.oppobarfrontStyleSheet =
     padding: 3px;
   ]]
 
-UI.oppobarbackStyleSheet = 
+UI.oppobarbackStyleSheet =
   [[background-color: rgba(255, 0, 0, 50%);
     border-width: 1px;
     border-color: black;
@@ -1970,7 +1970,7 @@ UI.oppobarbackStyleSheet =
     padding: 3px;
   ]]
 
-UI.allybarfrontStyleSheet = 
+UI.allybarfrontStyleSheet =
   [[background-color: rgba(0, 255, 0, 100%);
     border-width: 1px;
     border-color: black;
@@ -1979,7 +1979,7 @@ UI.allybarfrontStyleSheet =
     padding: 3px;
   ]]
 
-UI.allybarbackStyleSheet = 
+UI.allybarbackStyleSheet =
   [[background-color: rgba(0, 255, 0, 50%);
     border-width: 1px;
     border-color: black;
@@ -1988,7 +1988,7 @@ UI.allybarbackStyleSheet =
     padding: 3px;
   ]]
 
-UI.shieldbarfrontStyleSheet = 
+UI.shieldbarfrontStyleSheet =
   [[background-color: rgba(155, 155, 155, 80%);
     border-width: 1px;
     border-color: black;
@@ -1997,7 +1997,7 @@ UI.shieldbarfrontStyleSheet =
     padding: 3px;
   ]]
 
-UI.shieldbarbackStyleSheet = 
+UI.shieldbarbackStyleSheet =
   [[background-color: rgba(155, 155, 155, 50%);
     border-width: 1px;
     border-color: black;
@@ -2005,8 +2005,8 @@ UI.shieldbarbackStyleSheet =
     border-radius: 7;
     padding: 3px;
   ]]
-  
-UI.hpbarfrontStyleSheet = 
+
+UI.hpbarfrontStyleSheet =
   [[background-color: rgba(0, 255, 0,100%);
     border-width: 1px;
     border-color: black;
@@ -2015,7 +2015,7 @@ UI.hpbarfrontStyleSheet =
     padding: 3px;
   ]]
 
-UI.hpbarbackStyleSheet = 
+UI.hpbarbackStyleSheet =
   [[background-color: rgba(0, 255, 0,50%);
     border-width: 1px;
     border-color: black;
@@ -2023,8 +2023,8 @@ UI.hpbarbackStyleSheet =
     border-radius: 7;
     padding: 3px;
   ]]
-  
- UI.manabarfrontStyleSheet = 
+
+ UI.manabarfrontStyleSheet =
   [[background-color: rgba(0, 0, 255, 100%);
     border-width: 1px;
     border-color: black;
@@ -2033,7 +2033,7 @@ UI.hpbarbackStyleSheet =
     padding: 3px;
   ]]
 
-UI.manabarbackStyleSheet = 
+UI.manabarbackStyleSheet =
   [[background-color: rgba(0, 0, 255, 50%);
     border-width: 1px;
     border-color: black;
@@ -2041,8 +2041,8 @@ UI.manabarbackStyleSheet =
     border-radius: 7;
     padding: 3px;
   ]]
-  
- UI.movebarfrontStyleSheet = 
+
+ UI.movebarfrontStyleSheet =
   [[background-color: rgba(198, 198, 0, 100%);
     border-width: 1px;
     border-color: black;
@@ -2051,7 +2051,7 @@ UI.manabarbackStyleSheet =
     padding: 3px;
   ]]
 
-UI.movebarbackStyleSheet = 
+UI.movebarbackStyleSheet =
   [[background-color: rgba(198, 198, 0, 50%);
     border-width: 1px;
     border-color: black;
@@ -2059,8 +2059,8 @@ UI.movebarbackStyleSheet =
     border-radius: 7;
     padding: 3px;
   ]]
-  
-UI.expbarfrontStyleSheet = 
+
+UI.expbarfrontStyleSheet =
   [[background-color: rgba(155,0,225, 100%);
     border-width: 1px;
     border-color: black;
@@ -2069,7 +2069,7 @@ UI.expbarfrontStyleSheet =
     padding: 3px;
   ]]
 
-UI.expbarbackStyleSheet = 
+UI.expbarbackStyleSheet =
   [[background-color: rgba(155, 0, 225, 50%);
     border-width: 1px;
     border-color: black;
@@ -2077,8 +2077,8 @@ UI.expbarbackStyleSheet =
     border-radius: 7;
     padding: 3px;
   ]]
-  
- UI.herobarfrontStyleSheet = 
+
+ UI.herobarfrontStyleSheet =
   [[background-color: rgba(155, 0, 225, 100%);
     border-width: 1px;
     border-color: black;
@@ -2087,7 +2087,7 @@ UI.expbarbackStyleSheet =
     padding: 3px;
   ]]
 
-UI.herobarbackStyleSheet = 
+UI.herobarbackStyleSheet =
   [[background-color: rgba(155, 0, 225, 50%);
     border-width: 1px;
     border-color: black;
@@ -2095,8 +2095,8 @@ UI.herobarbackStyleSheet =
     border-radius: 7;
     padding: 3px;
   ]]
-  
- UI.ascendbarfrontStyleSheet = 
+
+ UI.ascendbarfrontStyleSheet =
   [[background-color: rgba(155, 0, 225, 100%);
     border-width: 1px;
     border-color: black;
@@ -2105,7 +2105,7 @@ UI.herobarbackStyleSheet =
     padding: 3px;
   ]]
 
-UI.ascendbarbackStyleSheet = 
+UI.ascendbarbackStyleSheet =
   [[background-color: rgba(155, 0, 225, 50%);
     border-width: 1px;
     border-color: black;
@@ -2121,63 +2121,63 @@ UI.ascendbarbackStyleSheet =
 						<script>function UI.gauge_setup()
 
   UI.gauge_state = UI.gauge_state or {false, false, false, false, false, false, false}
-  
+
   UI.watched_ally = 0
 
-  
-  
-  
+
+
+
   UI.bott_back = UI.bott_back or Geyser.Label:new(
     {name = "bott_back",
-     x=0, y=0, 
+     x=0, y=0,
      width="100%", height="100%"
     },GUI.bottom)
-  
+
   UI.bott_back:lower()
-  
+
   UI.bott_v_con = UI.bott_v_con or Geyser.VBox:new(
     {name = "bott_v_container",
-     x=0, y=0, 
+     x=0, y=0,
      width="100%", height="100%"
     },GUI.bottom)
-  
+
   UI.bott_h_row1 = UI.bott_h_row1 or Geyser.HBox:new(
     {name = "bott_h_row1",},UI.bott_v_con)
-    
+
   UI.bott_h_row2 = UI.bott_h_row2 or Geyser.HBox:new(
     {name = "bott_h_row2",},UI.bott_v_con)
-    
+
   UI.bott_h_row3 = UI.bott_h_row3 or Geyser.HBox:new(
     {name = "bott_h_row3",},UI.bott_v_con)
-    
+
   UI.bott_h_row4 = UI.bott_h_row4 or Geyser.HBox:new(
     {name = "bott_h_row4",},UI.bott_v_con)
-    
+
   --In Room Gauge(s)
   UI.fightingbar = UI.fightingbar or Geyser.Gauge:new(
     {name = "fightingbar",
      h_stretch_factor=3.0
     },UI.bott_h_row1)
-   
+
   UI.fightingbar.front:setStyleSheet(UI.oppobarfrontStyleSheet)
   UI.fightingbar.back:setStyleSheet(UI.oppobarbackStyleSheet)
   UI.fightingbar.text:setToolTip("Fighting", "10")
   --UI.fightingbar.text:setDoubleClickCallback("functionname",1)
   UI.fightingbar:hide()
-  
+
   UI.lockedallybar = UI.lockedallybar or Geyser.Gauge:new(
     {name = "lockedallybar",
      h_stretch_factor=3.0
     },UI.bott_h_row2)
-   
+
   UI.lockedallybar.front:setStyleSheet(UI.allybarfrontStyleSheet)
   UI.lockedallybar.back:setStyleSheet(UI.allybarbackStyleSheet)
   UI.lockedallybar.text:setToolTip("Shielding Unit", "10")
   --UI.lockedallybar.text:setDoubleClickCallback("functionname",1)
   UI.lockedallybar:hide()
-  
+
   UI.irbar = UI.irbar or {}
- 
+
   for i = 1,18 do
     local parent = UI.bott_h_row1
     if i &gt; 9 then
@@ -2197,7 +2197,7 @@ UI.ascendbarbackStyleSheet =
     end
     UI.irbar[i]:hide()
   end
-  
+
   --In Room Overflow Labels
   UI.iroverflow1 = UI.iroverflow1 or Geyser.Label:new(
   {name = "iroverflow1",
@@ -2206,7 +2206,7 @@ UI.ascendbarbackStyleSheet =
   --UI.iroverflow1:setToolTip("Etc", "10")
   --UI.iroverflow1:echo("&lt;left&gt;&lt;strong&gt;...", "18")
   UI.iroverflow1:hide()
-  
+
   UI.iroverflow2 = UI.iroverflow2 or Geyser.Label:new(
   {name = "iroverflow2",
   },UI.bott_h_row2)
@@ -2214,78 +2214,78 @@ UI.ascendbarbackStyleSheet =
   --UI.iroverflow2:setToolTip("Etc", "10")
   --UI.iroverflow2:echo("&lt;left&gt;&lt;strong&gt;...", "18")
   UI.iroverflow2:hide()
-  
+
   --Shield Gauge
   UI.shieldbar = UI.shieldbar or Geyser.Gauge:new(
     {name = "shieldbar",
     },UI.bott_h_row3)
-   
+
   UI.shieldbar.front:setStyleSheet(UI.shieldbarfrontStyleSheet)
   UI.shieldbar.back:setStyleSheet(UI.shieldbarbackStyleSheet)
   UI.shieldbar.text:setToolTip("Shielding Unit", "10")
   --UI.shieldbar.text:setDoubleClickCallback("UI.gauge_toggle",1)
   UI.shieldbar:hide()
-  
+
   --HP Gauge
   UI.hpbar = UI.hpbar or Geyser.Gauge:new(
     {name = "hpbar",
     },UI.bott_h_row3)
-    
+
   UI.hpbar.front:setStyleSheet(UI.hpbarfrontStyleSheet)
   UI.hpbar.back:setStyleSheet(UI.hpbarbackStyleSheet)
   UI.hpbar.text:setToolTip("Health", "10")
   --UI.hpbar.text:setDoubleClickCallback("UI.gauge_toggle",2)
   UI.hpbar:hide()
-  
+
   --Mana Gauge
   UI.manabar = UI.manabar or Geyser.Gauge:new(
     {name = "manabar",
     },UI.bott_h_row3)
-  
+
   UI.manabar.front:setStyleSheet(UI.manabarfrontStyleSheet)
   UI.manabar.back:setStyleSheet(UI.manabarbackStyleSheet)
   UI.manabar.text:setToolTip("Mana", "10")
   --UI.manabar.text:setDoubleClickCallback("UI.gauge_toggle",3)
   UI.manabar:hide()
-  
+
   --Move Gauge
   UI.movebar = UI.movembar or Geyser.Gauge:new(
     {name = "movembar",
     },UI.bott_h_row3)
-  
+
   UI.movebar.front:setStyleSheet(UI.movebarfrontStyleSheet)
   UI.movebar.back:setStyleSheet(UI.movebarbackStyleSheet)
   UI.movebar.text:setToolTip("Movement", "10")
   --UI.movebar.text:setDoubleClickCallback("UI.gauge_toggle",4)
   UI.movebar:hide()
-  
+
   --Exp Gauge
   UI.expbar = UI.expmbar or Geyser.Gauge:new(
     {name = "expmbar",
     },UI.bott_h_row4)
-  
+
   UI.expbar.front:setStyleSheet(UI.expbarfrontStyleSheet)
   UI.expbar.back:setStyleSheet(UI.expbarbackStyleSheet)
   UI.expbar.text:setToolTip("Experience", "10")
   --UI.expbar.text:setDoubleClickCallback("UI.gauge_toggle",5)
   UI.expbar:hide()
-  
+
   --Hero Gauge
   UI.herobar = UI.herombar or Geyser.Gauge:new(
     {name = "herombar",
     },UI.bott_h_row4)
-  
+
   UI.herobar.front:setStyleSheet(UI.herobarfrontStyleSheet)
   UI.herobar.back:setStyleSheet(UI.herobarbackStyleSheet)
   UI.herobar.text:setToolTip("Dings", "10")
   --UI.herobar.text:setDoubleClickCallback("UI.gauge_toggle",6)
   UI.herobar:hide()
-  
+
   --Ascend Gauge
   UI.ascendbar = UI.ascendmbar or Geyser.Gauge:new(
     {name = "ascendmbar",
     },UI.bott_h_row4)
-  
+
   UI.ascendbar.front:setStyleSheet(UI.ascendbarfrontStyleSheet)
   UI.ascendbar.back:setStyleSheet(UI.ascendbarbackStyleSheet)
   UI.ascendbar.text:setToolTip("Ascension", "10")
@@ -2325,7 +2325,7 @@ function UI.irbars_adjust1(to_left)
       if tonumber(i) == 1 then
         x = 0
       else
-        x = tonumber(UI.irbar[i - 1]:get_width()) + tonumber(UI.irbar[i - 1]:get_x()) 
+        x = tonumber(UI.irbar[i - 1]:get_width()) + tonumber(UI.irbar[i - 1]:get_x())
       end
       UI.irbar[i]:move(x,0)
     else
@@ -2348,7 +2348,7 @@ function UI.irbars_adjust2(to_left)
       if tonumber(i) == 10 then
         x = 0
       else
-        x = tonumber(UI.irbar[i - 1]:get_width()) + tonumber(UI.irbar[i - 1]:get_x()) 
+        x = tonumber(UI.irbar[i - 1]:get_width()) + tonumber(UI.irbar[i - 1]:get_x())
       end
       UI.irbar[i]:move(x,0)
     else
@@ -2370,14 +2370,14 @@ function UI.set_watched_ally(id)
   msdp.grab_PARTY_MEM()
 end
 
-function UI.gauge_toggle(index)  
+function UI.gauge_toggle(index)
   --flip the state
   if UI.gauge_state[index] == nil or UI.gauge_state[index] == false then
     UI.gauge_state[index] = true
   else
     UI.gauge_state[index] = false
   end
-  
+
   --force an update of the relevant gauge
   if tonumber(index) == 1 then
     msdp.grab_SHIELD_UNIT()
@@ -2396,7 +2396,7 @@ function UI.gauge_toggle(index)
   end
 
   --cecho("&lt;yellow&gt;[ DEBUG ] - &lt;grey&gt;guage_state[" ..tostring(index) .. "]:"..tostring(UI.gauge_state[index]).."\n")
-  
+
 end</script>
 						<eventHandlerList />
 					</Script>
@@ -2409,7 +2409,7 @@ function event_handler(event,...)
     UI.setup()
   elseif event == "sysDisconnectionEvent" then
     UI.dismantle()
-  elseif event == "sysWindowResizeEvent" then  
+  elseif event == "sysWindowResizeEvent" then
   end
 end
 
@@ -2439,7 +2439,7 @@ yOrbTable = yOrbTable or {}
 GUI.master=Adjustable.Container:new({name = "master", y = "0", x = "0", height = "100%", width = "100%", color = "transparent",
   autoload = true})
 
-GUI.bottom = Adjustable.Container:new({name = "bottom", title = "Gauges", 
+GUI.bottom = Adjustable.Container:new({name = "bottom", title = "Gauges",
   height = "6%", y = "-6%", autoLoad = true}, GUI.master)
 
 GUI.right = Adjustable.Container:new({name = "right", y = "0%", title = "Comms",
@@ -2448,11 +2448,11 @@ GUI.right = Adjustable.Container:new({name = "right", y = "0%", title = "Comms",
 GUI.left = Adjustable.Container:new({name = "left", x = "0%", y = "0%", title = "Trackers",
   height = "100%", width = "15%", autoLoad = true}, GUI.master)
 
-GUI.middle = Adjustable.Container:new({name = "middle", x = "15%", y = "0%", width = "60%", height = "94%", 
+GUI.middle = Adjustable.Container:new({name = "middle", x = "15%", y = "0%", width = "60%", height = "94%",
   autoWrap = true, title = "Console", autoLoad = true}, GUI.master)
 
 GUI.middle_term = GUI.middle_term or Geyser.MiniConsole:new(
-  {name = "middle_term", autoWrap = true, 
+  {name = "middle_term", autoWrap = true,
    x = "1%", y = "1%",
    width = "99%", height = "99%",
    color = "transparent",
@@ -2464,7 +2464,7 @@ GUI.middle_term = GUI.middle_term or Geyser.MiniConsole:new(
 --GUI.top = Adjustable.Container:new({name = "top", x = "0%", y = "0%", height = "10%", width = "100%", autoLoad = true}, GUI.middle)
 
 --GUI.room_term = GUI.room_term or Geyser.MiniConsole:new(
-  --{name = "room_term", autoWrap = true, 
+  --{name = "room_term", autoWrap = true,
    --x = "1%", y = "1%",
    --width = "99%", height = "99%",
    --color = "transparent",
@@ -2490,7 +2490,7 @@ GUI.middle:connectToBorder("bottom")
 
 UI.right_back = UI.right_back or Geyser.Label:new(
   {name = "right_back",
-  x = 0, y = 0, 
+  x = 0, y = 0,
   width = "100%", height = "100%",
   color = "transparent",
   },GUI.right)
@@ -2543,7 +2543,7 @@ GUI.dprDisplayTopLabel = GUI.dprDisplayTopLabel or
   },
   GUI.dprDisplay
   )
- 
+
  GUI.dprDisplayBotLabel = GUI.dprDisplayBotLabel or
   Geyser.Label:new(
   {
@@ -2557,7 +2557,7 @@ GUI.dprDisplayTopLabel = GUI.dprDisplayTopLabel or
   },
   GUI.dprDisplay
   )
-  
+
 GUI.dprDisplayBox = GUI.dprDisplayBox or
   Geyser.HBox:new(
     {
@@ -2565,11 +2565,11 @@ GUI.dprDisplayBox = GUI.dprDisplayBox or
     width = "98%",
     height = "80%",
     y= "10%",
-    color = "transparent",     
+    color = "transparent",
     },
     GUI.dprDisplay
     )
-    
+
 for i=1,50 do
   GUI[i.."dprRateBar"] = Geyser.Gauge:new(
       {
@@ -2578,7 +2578,7 @@ for i=1,50 do
       },
       GUI.dprDisplayBox
       )
-      
+
     GUI[i.."dprRateBar"].front:setStyleSheet([[background-color: rgba(255, 0, 0, 100%);
       border-width: 1px;
       border-height: 1px;
@@ -2587,7 +2587,7 @@ for i=1,50 do
       border-radius: 7;
       padding: 1px;
       ]])
-  
+
     GUI[i.."dprRateBar"].back:setStyleSheet([[background-color: rgba(255, 0, 0, 20%);
       border-width: 1px;
       border-height: 1px;
@@ -2596,8 +2596,8 @@ for i=1,50 do
       border-radius: 7;
       padding: 1px;
       ]])
-    
-    
+
+
     GUI[i.."dprRateBar"]:hide()
 end
 
@@ -2763,7 +2763,7 @@ if youAbsorbedCount == nil then
 end
 if youDodgedCount == nil then
   youDodgedCount = 0
-end 
+end
 if theyDodgedCount == nil then
   theyDodgedCount = 0
 end
@@ -2771,7 +2771,7 @@ if youParriedCount == nil then
   youParriedCount = 0
 end
 if theyParriedCount == nil then
-  theyParrieidCount = 0 
+  theyParrieidCount = 0
 end
 if youBlockedCount == nil then
   youBlockedCount = 0
@@ -2781,7 +2781,7 @@ if theyBlockedCount == nil then
 end
 if youPhasedCount == nil then
   youPhasedCount = 0
-end 
+end
 if theyPhasedCount == nil then
   theyPhasedCount = 0
 end
@@ -2820,11 +2820,11 @@ elseif rex.find(tostring(line), otherAbsorbRegEx) then
 elseif rex.find(tostring(line), theyAbsorbRegEx) then
   theyAbsorbed = true
 elseif rex.find(tostring(line), youSideStepRegEx) then
-  youDodged = true  
+  youDodged = true
 elseif rex.find(tostring(line), youEasilyAvoidRegEx) then
-  youDodged = true 
+  youDodged = true
 elseif rex.find(tostring(line), youRollRegEx) then
-  youDodged = true 
+  youDodged = true
 elseif rex.find(tostring(line), theyDodgeRegEx) then
   theyDodged = true
 elseif rex.find(tostring(line), theySideStepRegEx) then
@@ -2869,7 +2869,7 @@ end
 if youOrbed ==nil then
   youOrbed = 0
 end
-  
+
 if youDodged then
   youDodgedCount = youDodgedCount + 1
   youDefendCount = youDefendCount + 1
@@ -2973,7 +2973,7 @@ elseif theyBlocked then
   theyBlockedCount = theyBlockedCount + 1
   selectCurrentLine()
   deleteLine()
-  return  
+  return
 elseif youPhased then
   youPhasedCount = youPhasedCount + 1
   youDefendCount = youDefendCount + 1
@@ -3033,7 +3033,7 @@ GUI.defDisplayBox = GUI.defDisplayBox or
     width = "80%",
     height = "80%",
     y= "10%",
-    color = "transparent",     
+    color = "transparent",
     },
     GUI.defDisplay
     )
@@ -3046,7 +3046,7 @@ for i=1,50 do
       },
       GUI.defDisplayBox
       )
-  end          
+  end
 end
 </script>
 						<eventHandlerList />
@@ -3061,10 +3061,10 @@ end
 						<name>ez trigs</name>
 						<packageName></packageName>
 						<script>-- Jor'Mox's Command Line Simple Triggers and Aliases Script
--- 
+--
 -- use /alias pattern &gt;&gt; commands to send    to create an alias
 -- use /trigger pattern &gt;&gt; commands to send   to create a trigger
--- 
+--
 -- use * to indicate an argument or word(s) that must be provided
 -- use ? to indicate an argument or word(s) that is optional
 -- use %# to indicate the appropriately numbered argument or captured words
@@ -3072,7 +3072,7 @@ end
 --
 -- use /alias or /trigger to show a list of all aliases or triggers managed by this script
 -- use /delete alias # or /delete trigger # to delete that alias or trigger, using the number matching that shown on the list
--- 
+--
 
 cmd_line = cmd_line or {data = {}}
 cmd_line.data.triggers = cmd_line.triggers or {}
@@ -3165,7 +3165,7 @@ local function check_duplicate(ptrn, is_trigger)
         tbl = cmd_line.data.aliases
         func = killAlias
     end
-    
+
     for i,v in ipairs(tbl) do
         if v[2] == ptrn then
             func(v[1])
@@ -3278,7 +3278,7 @@ local function config()
         killAlias(v)
     end
     load_cmd()
-    
+
     script_aliases = {}
     table.insert(script_aliases,tempAlias([[^/(alias|trigger) (.*) &gt;&gt; (.*)$]],[[raiseEvent("cmdMakeItem",matches[2],matches[3],matches[4])]]))
     table.insert(script_aliases,tempAlias([[^/(alias|trigger)$]],[[raiseEvent("cmdShowList",matches[2])]]))

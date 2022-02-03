@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.001">
+	<TriggerPackage>
+		<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+			<name>lineCapture</name>
+			<script>local line = matches[2]
+ct.lineHandler(tostring(line))</script>
+			<triggerType>0</triggerType>
+			<conditonLineDelta>0</conditonLineDelta>
+			<mStayOpen>0</mStayOpen>
+			<mCommand></mCommand>
+			<packageName></packageName>
+			<mFgColor>#ff0000</mFgColor>
+			<mBgColor>#ffff00</mBgColor>
+			<mSoundFile></mSoundFile>
+			<colorTriggerFgColor>#000000</colorTriggerFgColor>
+			<colorTriggerBgColor>#000000</colorTriggerBgColor>
+			<regexCodeList>
+				<string>^(.*)$</string>
+			</regexCodeList>
+			<regexCodePropertyList>
+				<integer>1</integer>
+			</regexCodePropertyList>
+		</Trigger>
+	</TriggerPackage>
+	<TimerPackage />
+	<AliasPackage />
+	<ActionPackage />
+	<ScriptPackage>
+		<Script isActive="yes" isFolder="no">
+			<name>msdp.grab_ROUNDS</name>
+			<packageName></packageName>
+			<script>--This function fires on the msdp.ROUNDS event
+--msdp.ROUNDS increments every combat round, it value is truely unimportant
+--Values range from 0 to 2147483647
+--The important point is that if msdp.ROUNDS changed, it is a new round
+
+function msdp.grab_ROUNDS()
+  --Add a 51st table to ct.tracker, this is where we will copy in ct.ar
+  ct.tracker[#ct.tracker + 1] = { }
+  for k, v in pairs(ct.name) do
+    ct.ar[51] = 0
+  end
+  --Copy ct.cr into ct.tracker at the 51st table
+  for k, v in pairs(ct.ar) do
+    ct.tracker[51][k] = v
+  end
+  --Set everything in ct.ar to 0
+  ct.ar = {}
+  for k, v in pairs(ct.name) do
+    ct.ar[v] = 0
+  end
+  --Remove 1st table from tracker so that our 51st becomes 50th
+  while #ct.tracker &gt; 50 do
+    table.remove(ct.tracker, 1)
+  end
+  --Everything below here is for DEBUG
+  clearWindow("info_term")
+  for k in pairs(ct.tracker) do
+    --echo("info_term", tostring(k))
+    for key, val in pairs(ct.tracker[k]) do
+      echo("info_term", " " .. tostring(key) .. " " .. tostring(val) .. "\t")
+    end
+    echo("info_term", "\n")
+  end
+end</script>
+			<eventHandlerList>
+				<string>msdp.ROUNDS</string>
+			</eventHandlerList>
+		</Script>
+		<Script isActive="yes" isFolder="no">
+			<name>ct.lineHandler</name>
+			<packageName></packageName>
+			<script>--This function gets a line from the mud and runs it through ct.regex
+--When it matches something we increment that location in ct.ar
+
+function ct.lineHandler(line)
+  for k, v in pairs(ct.regex) do
+    if rex.find(tostring(line), v) then
+      ct.ar[k] = ct.ar[k] + 1
+      cecho("&lt;blue:yellow&gt;DEBUG: " .. tostring(k))
+      break
+    end
+  end
+end</script>
+			<eventHandlerList />
+		</Script>
+		<Script isActive="yes" isFolder="no">
+			<name>ct.trackerSetup</name>
+			<packageName></packageName>
+			<script>--This function will check for our requirments and setup our tables
+--Make sure you only call this on sysConnectionEvent it will overwrite ct.tracker and ct.currentRound
+
+function ct.trackerSetup()
+  --A table of all of our expression names
+  ct.name =
+    {
+      "youHit",
+      "youGotHit",
+      "otherHit",
+      "youDodge",
+      "theyDodge",
+      "otherDodge",
+      "youParry",
+      "theyParry",
+      "otherParry",
+      "youBlock",
+      "theyBlock",
+      "otherBlock",
+      "youShield",
+      "theyShield",
+      "otherShield",
+      "youPhase",
+      "theyPhase",
+      "otherPhase",
+      "youAbsorb",
+      "theyAbsorb",
+      "otherAbsorb",
+      "youKinetic",
+      "theyKinetic",
+      "otherKinetic",
+    }
+  cecho("&lt;blue:yellow&gt;DEBUG: ct.name table created.")
+  --A table of expressions for lines we are tracking
+  ct.exp =
+    {
+      [[^Your (?:pathetic|clumsy|fumbling|basic|lucky|shabby|average|competent|successful|skillful|well-aimed|effective|cunning|amazing|expert|deadly|vicious|wicked|brutal|powerful|incredible|masterful|monstrous|horrific|terrifying|savage|ungodly|MASSIVE|SADISTIC|-=GODLY=-) .+? (?:reflects off|misses|nicks|lightly skins|skins|lightly grazes|grazes|scratches|scrapes|hits|strikes|wounds|injures|mauls|scars|maims|mangles|destroys|decimates|guts|leaves GASHES|forever SCARS|DEMOLISHES|MASSACRES|DEVASTATES|does UNSPEAKABLE things to|SPLATTERS|-ANNIHILATES-|-=OBLITERATES=-|-=EVISCERATES=-|-=LAYS WASTE=- to|whiffs|biffs|lightly taps|taps|lightly touches|touches|feathers|strokes|contacts|jiggles|brushes up against|skimms|lightly rubs|nudges|prods|ravishes|pecks|smooches|fondles|leaves FEELINGS in|forever WOOS|lovingly FEEDS|gently AROUSES|lovingly CARESSES|does NAUGHTY things to|LEWDLY SPANKS|CREATES URGES within|GIVES JOY to|PROVIDES THE LOVE to|GIVES SWEET LOVIN' to) .+? \(\d+ dam\)$]],
+      [[^.*? (?:pathetic|clumsy|fumbling|basic|lucky|shabby|average|competent|successful|skillful|well-aimed|effective|cunning|amazing|expert|deadly|vicious|wicked|brutal|powerful|incredible|masterful|monstrous|horrific|terrifying|savage|ungodly|MASSIVE|SADISTIC|-=GODLY=-) .+? (?:reflects off|misses|nicks|lightly skins|skins|lightly grazes|grazes|scratches|scrapes|hits|strikes|wounds|injures|mauls|scars|maims|mangles|destroys|decimates|guts|leaves GASHES|forever SCARS|DEMOLISHES|MASSACRES|DEVASTATES|does UNSPEAKABLE things to|SPLATTERS|-ANNIHILATES-|-=OBLITERATES=-|-=EVISCERATES=-|-=LAYS WASTE=- to|whiffs|biffs|lightly taps|taps|lightly touches|touches|feathers|strokes|contacts|jiggles|brushes up against|skimms|lightly rubs|nudges|prods|ravishes|pecks|smooches|fondles|leaves FEELINGS in|forever WOOS|lovingly FEEDS|gently AROUSES|lovingly CARESSES|does NAUGHTY things to|LEWDLY SPANKS|CREATES URGES within|GIVES JOY to|PROVIDES THE LOVE to|GIVES SWEET LOVIN' to) (?:in you|your) .+? \(\d+ dam\)$]],
+      [[.*'s (?:pathetic|clumsy|fumbling|basic|lucky|shabby|average|competent|successful|skillful|well-aimed|effective|cunning|amazing|expert|deadly|vicious|wicked|brutal|powerful|incredible|masterful|monstrous|horrific|terrifying|savage|ungodly|MASSIVE|SADISTIC|-=GODLY=-) .+? (?:reflects off|misses|nicks|lightly skins|skins|lightly grazes|grazes|scratches|scrapes|hits|strikes|wounds|injures|mauls|scars|maims|mangles|destroys|decimates|guts|leaves GASHES|forever SCARS|DEMOLISHES|MASSACRES|DEVASTATES|does UNSPEAKABLE things to|SPLATTERS|-ANNIHILATES-|-=OBLITERATES=-|-=EVISCERATES=-|-=LAYS WASTE=- to|whiffs|biffs|lightly taps|taps|lightly touches|touches|feathers|strokes|contacts|jiggles|brushes up against|skimms|lightly rubs|nudges|prods|ravishes|pecks|smooches|fondles|leaves FEELINGS in|forever WOOS|lovingly FEEDS|gently AROUSES|lovingly CARESSES|does NAUGHTY things to|LEWDLY SPANKS|CREATES URGES within|GIVES JOY to|PROVIDES THE LOVE to|GIVES SWEET LOVIN' to) .+?.$]],
+      [[^You (?:roll to avoid|easily avoid|side-step|dodge) .*\.$]],
+      [[^.* (?:rolls to avoid|easily avoids|side-steps|dodges) your .*\.$]],
+      [[^.* (?:rolls to avoid|easily avoids|side-steps|dodges) .*'s .*\.$]],
+      [[^You(.*)parry (.*) with (.*)$]],
+      [[^(.*) parries your (.*) with (.*)$]],
+      [[^(.*) parries (.*)'s (.*) with (.)$]],
+      [[^You block (.*)'s (.*)$]],
+      [[^(.*) blocks your (.*)$]],
+      [[NA]],
+      [[^You block (.*)'s (.*) with (.*)!$]],
+      [[^(.*) blocks your (.*) with (.*)$]],
+      [[NA]],
+      [[^You phase to avoid (.*)'s (.*)$]],
+      [[^(.*) phases to avoid your (.*)$]],
+      [[NA]],
+      [[^Your (.*) absorb[\s] (.*)$]],
+      [[^(.*) absorb your (.*)$]],
+      [[^(.*)'s (.*) absorb[\s] (.*)'s (.*)$]],
+      [[^(.*) intercepts (.*)'s attack!$]],
+      [[^(.*) intercepts your attack!$]],
+      [[NA]],
+    }
+  cecho("&lt;blue:yellow&gt;DEBUG: ct.exp table created.")
+  --For each entry in ct.name we need an entry in ct.exp
+  --Verify our tables match in size, error out if they do not.
+  if #ct.name ~= #ct.exp then
+    cecho("&lt;blue:yellow&gt;DEBUG: trackerSetup() failed due to unmatched table size.")
+    return
+  end
+  cecho("&lt;blue:yellow&gt;DEBUG: ct.name table and ct.exp table size matched.")
+  --verify that we have msdp on as we rely on msdp.grap_rounds(), alterntivly offer to use isPrompt()
+  
+  --Combine ct.name and ct.exp into a new table ct.regex
+  ct.regex = { }
+  for k, v in pairs(ct.name) do
+    ct.regex[v] = ct.exp[k]
+  end
+  cecho("&lt;blue:yellow&gt;DEBUG: ct.regex table created.")
+  --Create ct.tracker to contain the number of matched lines per round
+  --We are going to go with 50 rounds of data
+  ct.tracker = { }
+  for i = 1, 50 do
+    ct.tracker[i] = { }
+    for k, v in pairs(ct.name) do
+      ct.tracker[i][v] = 0
+    end
+  end
+  cecho("&lt;blue:yellow&gt;DEBUG: ct.tracker table created.")
+  --Create a container for our active round data
+  --This is like ct.tracker but only a single table
+  ct.ar = { }
+  for k, v in pairs(ct.name) do
+    ct.ar[v] = 0
+  end
+  cecho("&lt;blue:yellow&gt;DEBUG: ct.ar table created.")
+  cecho("&lt;blue:yellow&gt;DEBUG: ct.trackerSetup complete.")
+end</script>
+			<eventHandlerList />
+		</Script>
+	</ScriptPackage>
+	<KeyPackage />
+	<VariablePackage>
+		<HiddenVariables />
+	</VariablePackage>
+</MudletPackage>
